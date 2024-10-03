@@ -8,6 +8,14 @@ o,o     1.0     2.0
 0,2     1,2     2,2
 0,3     1,3     2,3
 
+padding es el espacio que se deja entre los elementos y el margen de los elementos:
+Dentro del componente: se aplica en el grid
+ipadx = valor en pixeles a la derecha e izquierda
+ipady = espacion entre la parte superior e inferior
+
+Fuera del componente: se aplica en el grid
+pady = izquierda y derecha
+padx = superior e inferior
 
 '''
 
@@ -59,7 +67,7 @@ w west                          e east
 sw sourth west      s sout      se sourth east
 
                     ns tola la columna central
-                    ew toda la fila central 
+                    ws toda la fila central 
 
 '''
 
@@ -70,22 +78,42 @@ ventana.geometry('600x400')
 ventana.title('Manejo de grid')
 ventana.iconbitmap('icono.ico')
 
+#Configurar el grid
+ventana.rowconfigure(0, weight=1)#1er renglon ocupa - espacio que el 2do
+ventana.rowconfigure(1,weight=10)
+ventana.columnconfigure(0,weight=1)
+ventana.columnconfigure(1,weight=5)
+
+
 #   Metodos de los eventos
 def evento1():
     boton1.config(text='Boton 1 presionado')#config nos permite cambiar la configuracion del mismo despues de hacer el evento
 def evento2():
     boton2.config(text='Boton 2 presionado')
+def evento3():
+    boton3.config(text='Boton 3 presionado')
+def evento4(): #fg foreground primer plano permite cambiar el color de la fuente
+    boton4.config(text='Boton 4 presionado',fg='blue',relief=tk.GROOVE,background='gray')#RELIEF modifica el relieve
+
 
 #definimos 2 botones
 boton1 = ttk.Button(ventana, text='Boton 1', command=evento1)
 #boton1.pack()#con pack lo agregamos a nuestra ventana
-boton1.grid(row=0, column=0,sticky='W')
+#para combinar celdas con 'columnspan' y filas con 'rowspan'
+boton1.grid(row=0, column=0,sticky='NSWE',padx=40,pady=40,
+            ipadx= 20,ipady=10,columnspan=2,rowspan=2)
 
 #n(arriba), e(derecha), r(abajo), w(izquierda)
 #tambien se puede usar  tk.N,S,E etc en lugar de la cadena
 boton2 = ttk.Button(ventana, text='Boton 2', command=evento2)
-boton2.grid(row=1,column=0, sticky='W')#CON W EL boton se carga a la izq
+#boton2.grid(row=1,column=0, sticky='NSWE')#CON W EL boton se carga a la izq
 
+boton3 = ttk.Button(ventana, text='Boton 3', command=evento3)
+boton3.grid(row=0, column=3, sticky='NSWE')
+
+#tk nos permite acceder a mas configuraciones de diseño y ttk no
+boton4 = tk.Button(ventana, text='Boton 4', command=evento4)
+#boton4.grid(row=1, column=1, sticky='NSWE')
 
 ventana.mainloop()#mainloop recive todos los eventos y muestra la aventana
 
