@@ -1,5 +1,5 @@
 '''
-Creacion de usuario con tkinter
+Creacion de usuario con tkinter con POO
 '''
 
 import tkinter as tk
