@@ -47,6 +47,37 @@ def crear_componentes_tabulador3(tabulador):
     boton1 = ttk.Button(tabulador, text='Mostrar valor seleccionado', command=mostrar_valor)
     boton1.grid(row=0, column=1)
 
+def crear_componentes_tabulador4(tabulador):
+    imagen = tk.PhotoImage(file='python-logo.png')
+    def mostrar_titulo():
+        messagebox.showinfo('Mas informacion de la imagen', f'Nombre de la Imagen: {imagen.cget("file")}')#cget recupera el nombre del archivo de la imagen
+    boton_imagen = ttk.Button(tabulador, image=imagen, command=mostrar_titulo)
+    boton_imagen.grid(row=0, column=0)
+
+def crear_componentes_tabulador5(tabulador):
+    #creamos el componente de barra de progreso al subir un archivo
+    barra_progreso = ttk.Progressbar(tabulador, orient='horizontal', length=550)
+    barra_progreso.grid(row=0, column=0, padx=10, pady=10, columnspan=4)
+    #Metodos para comtrolar los eventos de la barra de progreso
+    def ejecutar_barra():
+        pass
+    def ejecutar_ciclo():
+        barra_progreso.start()
+    def detener():
+        barra_progreso.stop()
+    def detener_despues():
+        esparar_ms = 2000
+        ventana.after(esparar_ms, barra_progreso.stop)#after detiene la ejecusion de un componente despues de ciertos segundos
+    #botones para controlar eventos de una barra de progreso
+    boton_inicio = tk.Button(tabulador, text='Ejecutar barra de progreso', command=ejecutar_barra)
+    boton_inicio.grid(row=1, column=0)
+    boton_ciclo = tk.Button(tabulador, text='Ejecutar ciclo', command=ejecutar_ciclo)
+    boton_ciclo.grid(row=1, column=1)
+    boton_detener = ttk.Button(tabulador, text='Detener Ejecucion', command=detener)
+    boton_detener.grid(row=1, column=2)
+    boton_despues = ttk.Button(tabulador, text='Detener ejecucion', command=detener_despues)
+    boton_despues.grid(row=1, column=3)
+
 
 def crear_tabs():
     #creamos un tab control con la clase Notebook
@@ -72,6 +103,20 @@ def crear_tabs():
     control_tabulador.add(tabulador3, text='Tabulador 3')
     #creamos los componentes del 3re tabulador
     crear_componentes_tabulador3(tabulador3)
+
+    #creamos el tabulador 4
+    tabulador4 = ttk.LabelFrame(control_tabulador, text='Imagen')
+    control_tabulador.add(tabulador4, text='Tabulador 4')
+    #creamos los componentes del tabuladpor 4
+    crear_componentes_tabulador4(tabulador4)
+
+    #creamos el tabulador 5
+    tabulador5 = tk.LabelFrame(control_tabulador, text='Barra de progreso')
+    control_tabulador.add(tabulador5, text='Tabulador 5')
+    #creamos componentes del 5 tabulador
+    crear_componentes_tabulador5(tabulador5)
+
+
 
 crear_tabs()
 ventana.mainloop()
