@@ -1,11 +1,12 @@
 '''
-Tabuladores
+Tabuladores, botones, scroll, barras de progreso, imagenes, etc.
 '''
 import tkinter as tk
 from tkinter import ttk, messagebox, scrolledtext
+from time import sleep
 
 ventana = tk.Tk()
-ventana.geometry('600x400')
+ventana.geometry('650x400+450+200')#los ultimos dos datos son para las cordenadas de donde de mostrara la ventana
 ventana.title('Componentes')
 ventana.iconbitmap('icono.ico')
 
@@ -60,7 +61,17 @@ def crear_componentes_tabulador5(tabulador):
     barra_progreso.grid(row=0, column=0, padx=10, pady=10, columnspan=4)
     #Metodos para comtrolar los eventos de la barra de progreso
     def ejecutar_barra():
-        pass
+        #indica el maximo de la barra de progreso
+        barra_progreso['maximum'] = 100
+        for valor in range(101):
+            #mandamos a esperar un poco antes de continuar con la ejecucion de la barra
+            sleep(0.05)#lo importamos de la libreria de time
+            #incrementamos la barra de progreso
+            barra_progreso['value'] = valor
+            #para que se refleje actualizamos nuestra barra de progreso
+            barra_progreso.update()
+            #Una vez que se ejecuto retornamos el valor a 0
+        barra_progreso['value'] = 0
     def ejecutar_ciclo():
         barra_progreso.start()
     def detener():
