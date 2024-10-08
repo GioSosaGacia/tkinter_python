@@ -18,7 +18,7 @@ class Calculadora(tk.Tk):
         #Atributos de la clase
         self.expresion = ''  #la utilizaremos para usar la funcion eval() permite evaluar un str considerendo los valores aritmeticos que encuentre
         #Caja de texto de tipo input
-        self.entrada = None
+        #self.entrada = None
         #StringVar lo utilizamos para obtener o actualizar el valor del input
         self.entrada_texto = tk.StringVar()
         #Creación de los componentes
@@ -29,7 +29,7 @@ class Calculadora(tk.Tk):
         #Para crear los componentes
     def _creacion_componentes(self):
         #Creamos el 1re frame para la caja de texto
-        entrada_frame = tk.Frame(self, width='400', height=50, bg='grey')
+        entrada_frame = tk.Frame(self, width='500', height=50, bg='grey')
         #publicamos el objeto con pack
         entrada_frame.pack(side=tk.TOP) #side tk.top hace que lo posiciones arriba(top)
         #Agregamos la caja de texto
@@ -111,9 +111,6 @@ class Calculadora(tk.Tk):
         #Concatenamos el nuevo elemento presionado a la expresion ya existente
         self.expresion = f'{self.expresion}{elemento}'
         self.entrada_texto.set(self.expresion)
-
-
-
 
 
 if __name__ == '__main__':
