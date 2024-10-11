@@ -111,3 +111,11 @@ class Editor(tk.Tk):
 if __name__ == '__main__':
     editor = Editor()
     editor.mainloop()
+
+
+'''
+Frame es una ventana invisibles, una ventana dentro de una ventana,
+Permite administrar los componentes dentro del mismo frame 
+ya que el grid si usamos demaciadas columnas se complicaria la configuracion,
+se pueden agregar tantos frames como se requieran
+'''
