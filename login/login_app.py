@@ -61,6 +61,7 @@ def validar(event):
     #usuario y password = admin  son los valores correctos
     if usuario == 'root' and password == 'admin':
         showinfo(title='Login', message='Datos correctos!!')
+        print('Acceso correcto')
     else:
         showerror(title='Login', message='Datos incorrectos!')
 
