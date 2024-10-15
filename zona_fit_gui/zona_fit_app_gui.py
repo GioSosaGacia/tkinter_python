@@ -162,7 +162,13 @@ class App(tk.Tk):
             return False
 
     def eliminar_cliente(self):
-        pass
+        if self.id_cliente is None:
+            showerror(title='Atencion', message='Debes de seleccionar un cliente a eliminar...')
+        else:
+            cliente = Cliente(id=self.id_cliente)
+            ClienteDAO.eliminar(cliente)
+            showinfo(title='Eliminado',message='Cliente eliminado')
+            self.recargar_datos()
 
     def recargar_datos(self):
         #volver a cargar los datos de la tabla
@@ -175,16 +181,24 @@ class App(tk.Tk):
         nombre = self.nombre_t.get()
         apellido = self.apellido_t.get()
         membresia = self.membresia_t.get()
-        cliente = Cliente(nombre=nombre, apellido=apellido, membresia=membresia)
-        ClienteDAO.insertar(cliente)
-        showinfo(title='Agregar', message='Cliente agregado')
+        if self.id_cliente is None:
+            cliente = Cliente(nombre=nombre, apellido=apellido, membresia=membresia)
+            ClienteDAO.insertar(cliente)
+            showinfo(title='Agregar', message='Cliente agregado')
+        else: #actualizar resgistro
+            cliente = Cliente(self.id_cliente, nombre, apellido, membresia)
+            ClienteDAO.actualizar(cliente)
+            showinfo(title='Actualizar', message='Cliente actualizado...')
         #volvemos a mostrar lso datos y limpiamos el formulario
         self.recargar_datos()
 
 #agregamos event para asociar el evento creado al dar click en un registro
     def cargar_cliente(self,event):
-        elemento_seleccionado = self.tabla.selection()[0]
+        #recuperar el evento seleccionado
+        elemento_seleccionado = self.tabla.selection()[0]#recupera el primer registro selccionado
+        #recuperamos el componente del elemento seleccionado con item
         elemento = self.tabla.item(elemento_seleccionado)
+        #recuperar la tupla de valores del cliete
         cliente_t = elemento['values']#obtiene la tupla de valores del elemento selecionado
         #recuperar cada valor del cliente para llenar el formulario
         self.id_cliente = cliente_t[0]
